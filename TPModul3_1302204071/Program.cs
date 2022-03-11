@@ -9,6 +9,10 @@ class Program
         table_Kodepos.getKodepos("Mengger");
         Console.WriteLine("__________ Code Pos List __________");
         table_Kodepos.getAllkodepos();
+
+        Console.WriteLine("________ KUNCI PINTU ________");
+        Doormachine pintu = new Doormachine();
+        pintu.kunci();
     }
 
 }
@@ -51,4 +55,38 @@ class KodePos
     }
 
 
+}
+
+class Doormachine
+{
+    enum State { TERKUNCI, TERBUKA };
+    public void kunci()
+    {
+        State state = State.TERKUNCI;
+
+        String[] screenName = { "TERKUNCI", "TERBUKA" };
+        do
+        {
+            Console.WriteLine("PINTU " + screenName[(int)state]);
+            Console.Write("Enter Command : ");
+            String command = Console.ReadLine();
+            switch (state)
+            {
+                case State.TERKUNCI:
+                    if (command == "Buka Pintu")
+                    {
+                        state = State.TERBUKA;
+                    }
+                    break;
+                case State.TERBUKA:
+                    if (command == "Kunci Pintu")
+                    {
+                        state = State.TERKUNCI;
+                    }
+                    break;
+
+
+            }
+        } while (state != State.TERKUNCI);
+    }
 }
